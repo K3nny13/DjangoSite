@@ -11,12 +11,14 @@
       </div>
     </div>
 </section>
-<section>
+<section class="section">
     <div class="container">
         <div class="tile is-ancestor">
             <div class="tile is-parent">
                 <div class="tile is-child box">
                     <p class="title">{{ article.title }}</p>
+                    <img class="image is-128x128" src="{{ article.thumb.url }}">
+                    <br>
                     <p class="subtitle">{{ article.body }}</p>
                     <p class="subtitle">{{ article.date }}</p>
                 </div>

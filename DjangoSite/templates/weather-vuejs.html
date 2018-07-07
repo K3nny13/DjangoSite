@@ -1,9 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
+{% load static %}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
 <script src="https://unpkg.com/vue"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.css" />
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" />
+
 <section class="hero is-info">
     <div class="hero-body">
         <div class="container">
@@ -14,33 +19,34 @@
     </div>
 </section>
 <div id="app">
-<section>
+<section class="section">
     <div class="container">
         <div class="columns">
             <div class="column is-offset-4 is-4">
-                <form method="POST">
-                    <div class="field has-addons">
-                        <div class="control is-expanded">
-                            <input class="input" name="city" type="text" placeholder="Type a Location">
-                        </div>
-                        <div class="control">
-                            <button class="button is-primary">
-                                Add
-                            </button>
-                        </div>
+                <div class="notification is-danger" v-if="errorMessage">
+                    <button class="delete" v-on:click="clearError"></button>
+                    <p>Invalid Location <strong>"[[ errorMessage ]]"</strong></p>
+                </div>
+                <div class="field has-addons">
+                    <div class="control is-expanded">
+                        <input class="input" v-model="city" v-on:keyup.enter="addWeatherComp" type="text" placeholder="Type a Location">
                     </div>
-                    <br>
-                </form>
+                    <div class="control">
+                        <button class="button is-primary" v-on:click="addWeatherComp">
+                            Go
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </section>
-<section>
+<section class="section">
     <div class="container">
         <div class="columns">
             <div class="column is-offset-4 is-4">
                 <transition-group name="boxes" enter-active-class="animated bounceInUp" leave-active-class="animated bounceOutDown">
-                    <weather-box v-for="(location, index) in locations" :name="location.name" :key="index"></weather-box>
+                    <weather-box v-for="(location, index) in locations" :key="location.id" :location="location" v-on:remove="locations.splice(index, 1)" v-on:errored="sayError" v-on:clear-error="clearError"></weather-box>
                 </transition-group>
             </div>
         </div>
@@ -48,77 +54,26 @@
 </section>
 </div>
 
-
-<script>
-
-const weather_box = {
-    delimiters: ["[[", "]]"],
-    template: 
-    `<div class="box is-info">
-            <article class="media">
-                <div class="media-left">
-                    <figure class="image is-50x50">
-                        <img src="[[ logoUrl ]]" alt="Image">
-                    </figure>
-                </div>
-                <div class="media-content">
-                    <div class="content">
-                        <p>
-                            <span class="title">[[ info.name ]]</span>
-                            <br>
-                            <span class="subtitle">[[ info.main.temp ]]° C</span>
-                            <br><span>[[ info.weather[0]["description"] ]]</span>
-                        </p>
-                    </div>
-                </div>
-                <div class="media-right">
-                    <button class="delete"></button>
-                </div>
-            </article>
-        </div>`,
-    
-    data (){
-        return{
-            info: '',
-            error: '',
-            icon:''
-        }
-    },
-
-
-
-    created() {
-        
-        axios.get("http://api.openweathermap.org/data/2.5/weather?q=London&units=metric&APPID=65af4edbe637c0498a4e3774dc356fc1")
-        .then(response => this.info = response.data)
-        .catch(response => this.error = "and error happened")
-        
-    }
-            
-}
-
-var app = new Vue(
-    {
-        delimiters: ["[[", "]]"],
-        el: "#app",
-        components: {
-            "weather-box" : weather_box,
-        },
-        data(){
-            return {
-                locations: [{location: 'Cape Town'}]
-            }
-        }
-        
-    }
-)
-
-</script>
+<script type="text/javascript" src="{% static 'js/vue-weather.js' %}"></script>
 
 <style>
-    #app p{
-        color: whitesmoke;
-    }
+        #app p{
+            color: whitesmoke;
+        }
+
+        .description{
+            font-weight: bold;
+            color: rgb(29, 29, 29);
+        }
+
+        .country{
+            font-weight: bold;
+            color: rgb(29, 29, 29);
+        }
+        body {
+            background-color: rgb(44, 44, 44);
+            min-height: 100%;
+        }
 </style>
 
 

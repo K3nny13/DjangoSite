@@ -8,14 +8,14 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<title>Bulzii3D</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css" type="text/css">
-    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 
     <body>
         <nav class="navbar is-dark">
             <div class="navbar-brand">
                 <a class="navbar-item" href={% url 'index' %}>
-                    <img src="{% static 'BuLzii-Logo.png' %}" width="112" height="28">
+                    <img src="{% static 'images/BuLzii-Logo.png' %}" width="112" height="28">
                 </a>
                 <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
                     <span></span>
@@ -51,7 +51,7 @@
                     <a class="navbar-item" href="{% url 'index' %}">
                         Sign Up
                     </a>
-                    <a class="navbar-item" href="{% url 'index' %}">
+                    <a class="navbar-item" href="{% url 'accounts:login' %}">
                         Login
                     </a>
                 </div>

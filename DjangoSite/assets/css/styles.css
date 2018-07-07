@@ -1,0 +1,22 @@
+body {
+    background-color: #0f121f;
+}
+
+
+html {
+    margin: 0px;
+    height: 100%;
+    width: 100%;
+ }
+ 
+ body {
+    margin: 0px;
+    min-height: 100%;
+    width: 100%;
+ }
+
+
+
+.hero{
+    margin-bottom: 2rem;
+}
