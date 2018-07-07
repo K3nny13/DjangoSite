@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="hero is-info">
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title">
+          Articles List
+        </h1>
+      </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        {% for article in articles %}
+        <div class="tile is-ancestor">
+            <div class="tile is-parent">
+                <div class="tile is-child box">
+                  <a href="{% url 'article_detail' slug=article.slug %}">
+                    <p class="title">{{ article.title }}</p>
+                    <p class="subtitle">{{ article.snippet }}</p>
+                    <p class="subtitle">{{ article.date }}</p>
+                  </a> 
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+
+{% endblock  %}

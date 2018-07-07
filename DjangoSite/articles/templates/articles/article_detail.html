@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="hero is-info">
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title">
+            Article Detail
+        </h1>
+        <a class="button is-primary" href="{% url 'article_list' %}">Back to Articles List</a>
+      </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="tile is-ancestor">
+            <div class="tile is-parent">
+                <div class="tile is-child box">
+                    <p class="title">{{ article.title }}</p>
+                    <p class="subtitle">{{ article.body }}</p>
+                    <p class="subtitle">{{ article.date }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock  %}
