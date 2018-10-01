@@ -16,7 +16,7 @@
         <div class="tile is-ancestor">
             <div class="tile is-parent">
                 <div class="tile is-child box">
-                  <a href="{% url 'article_detail' slug=article.slug %}">
+                  <a href="{% url 'articles:article_detail' slug=article.slug %}">
                     <p class="title">{{ article.title }}</p>
                     <p class="subtitle">{{ article.snippet }}</p>
                     <p class="subtitle">{{ article.date }}</p>

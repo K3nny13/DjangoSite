@@ -31,7 +31,7 @@
                             Menu
                         </a>
                         <div class="navbar-dropdown is-boxed">
-                            <a class="navbar-item" href="{% url 'article_list' %}">
+                            <a class="navbar-item" href="{% url 'articles:article_list' %}">
                                 Articles List
                             </a>
                             <a class="navbar-item" href="{% url 'about' %}">
@@ -54,6 +54,10 @@
                     <a class="navbar-item" href="{% url 'accounts:login' %}">
                         Login
                     </a>
+					<form method="POST" action={% url 'accounts:logout' %}>
+						{% csrf_token %}
+						<button class="button is-primary" type="submit">Logout</button>
+					</form>
                 </div>
             </div>
         </nav>

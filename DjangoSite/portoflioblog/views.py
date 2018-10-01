@@ -10,3 +10,4 @@ def about(request):
 
 def weather_vuejs(request):
     return render(request, 'weather-vuejs.html')
+	
