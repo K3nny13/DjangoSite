@@ -13,15 +13,22 @@ def login(request):
 			# Log user in
 			user = form.get_user()
 			auth_login(request, user)
-			return redirect('articles:article_list')
+			if 'next' in request.POST:
+				return redirect(request.POST.get('next'))
+			else:
+				return redirect('articles:article_list')
 	
 	else:	
 		form = AuthenticationForm()
 	return render(request, 'accounts/login.html', context = { 'form':form })
 	
 def logout(request):
-	auth_logout(request)
-	return redirect('accounts:login')	
+	if request.method == "POST":
+		auth_logout(request)
+		return redirect('index')
+	else:
+		return render(request, 'accounts/logout.html')
+		
 
 def signup(request):
 
