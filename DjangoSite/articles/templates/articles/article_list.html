@@ -7,7 +7,7 @@
       <h1 class="title">
         Articles List
       </h1>
-	  <a class="button is-primary" href="{% url 'articles:create' %}">Create Article</a>
+      <a class="button is-primary" href="{% url 'articles:create' %}">Create Article</a>
     </div>
   </div>
 </section>
@@ -22,6 +22,7 @@
             <p class="title">{{ article.title }}</p>
             <p class="subtitle">{{ article.snippet }}</p>
             <p class="subtitle">{{ article.date }}</p>
+            <p class="subtitle">Created by: <b>{{ article.author }}</b></p>
           </a>
         </div>
       </div>
