@@ -13,9 +13,12 @@
 <section class="section">
   <div class="container">
     <form class="site-form" action="{% url 'articles:create' %}" method="post" enctype="multipart/form-data">
-      {% csrf_token %}
-      {{ form }}
-      <input type="submit" value="Create">
+      {% csrf_token %}		
+		{% for field in form %}
+		{{ field.label_tag }} </br> {{ field }} </br>
+		{% endfor %}
+		</br>
+      <input class="button is-block is-info is-large" type="submit" value="Create">
     </form>
   </div>
 </section>
